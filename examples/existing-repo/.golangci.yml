@@ -1,0 +1,22 @@
+version: "2"
+linters:
+  enable:
+    - heft
+  settings:
+    custom:
+      heft:
+        type: module
+        description: Keeps Go packages small so tests stay fast and cache well.
+        original-url: github.com/digitaldrywood/heft
+        settings:
+          exclude:
+            - "**/db/sqlc/**"
+            - "**/*_templ.go"
+            - "**/mocks/**"
+          exclude-packages:
+            - "example.com/app/web/templates/**"
+          overrides:
+            - packages: ["example.com/app/internal/legacy/**"]
+              limits: {files: 120, loc: 30000}
+          banned-names: [util, utils, common, helpers, models]
+          baseline: .heft-baseline.json

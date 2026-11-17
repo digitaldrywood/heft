@@ -1,0 +1,21 @@
+name: heft
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  heft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Package size limits and baseline
+        run: go run github.com/digitaldrywood/heft/cmd/heft@latest check ./...
+      - name: Baseline is as tight as the code
+        run: go run github.com/digitaldrywood/heft/cmd/heft@latest baseline tighten -check ./...
+      - name: Test time and blast radius
+        run: |
+          go test -json ./... > test.json || true
+          go run github.com/digitaldrywood/heft/cmd/heft@latest report -test-json test.json -top 20

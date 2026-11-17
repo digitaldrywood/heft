@@ -1,0 +1,6 @@
+# Build a golangci-lint binary that includes heft: `golangci-lint custom`
+version: v2.14.0
+plugins:
+  - module: github.com/digitaldrywood/heft
+    import: github.com/digitaldrywood/heft/plugin
+    version: latest

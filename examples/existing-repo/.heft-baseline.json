@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "packages": {
+    "example.com/app/internal/store": {
+      "files": 273,
+      "loc": 54027
+    },
+    "example.com/app/internal/store_test": {
+      "test-files": 234,
+      "test-funcs": 913
+    }
+  }
+}
